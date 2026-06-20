@@ -58,7 +58,7 @@ dev = [
 where = ["src"]
 
 [tool.setuptools.package-data]
-"*" = ["*.viva"]
+viva = ["grammars/*.lark"]
 
 [tool.ruff]
 line-length = 88
