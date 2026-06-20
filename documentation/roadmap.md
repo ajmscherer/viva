@@ -3,7 +3,7 @@
 **Status:** Initial draft (June 3, 2026)  
 **Origin:** Derived directly from `genesis.txt`  
 **Maintainer:** Alexandre Scherer (owner) with Grok 4.3 (assistant)  
-**Repository:** https://github.com/ajmscherer/viva (public)
+**Repository:** https://github.com/ajmscherer/viva (public) — Note: This is a fresh history repository. The full original history is in the private https://github.com/ajmscherer/viva_original .
 
 ---
 

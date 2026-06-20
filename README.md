@@ -25,7 +25,7 @@ Newer syntax also supports:
 - Big numbers: `3 million`, `4.2 thousand`, `2 trillion`, `1B`, `5m` (case-insensitive)
 - Late births: a life born after `start_year` can still die randomly (sampling starts at birth year)
 
-The interpreter turns this into a Python function that returns a flat list of dated cash flow events: `list[dict['date': date (Jan 1 of year in MVP), 'name': str, 'amount': float, 'currency': 'USD']]`. See `genesis.txt` and `roadmap.md` for the exact current model + deferred refinements (full dates, multicurrency, per-period granularity).
+The interpreter turns this into a Python function that returns a flat list of dated cash flow events: `list[dict['date': date (Jan 1 of year in MVP), 'name': str, 'amount': float, 'currency': 'USD']]`. See `roadmap.md` for the exact current model + deferred refinements (full dates, multicurrency, per-period granularity). The original detailed origin document is in the private repository.
 
 ## Goals
 
@@ -37,8 +37,8 @@ The interpreter turns this into a Python function that returns a flat list of da
 
 ## Project Structure
 
-- `genesis.txt` — Origin, vision, and ownership statement.
-- `roadmap.md` — Detailed development plan, phases, and current status.
+- `roadmap.md` — Detailed development plan, phases, and current status. (The original genesis.txt and full history are preserved in the private `viva_original` repository.)
+- `AI - transcripts/` — Conversation logs and research notes. (Historical transcripts may reference prior private files.)
 - `AI - transcripts/` — Conversation logs and research notes.
 - `src/viva/`:
   - `grammars/viva.lark` — The Lark grammar definition (source of truth for the language syntax; supports birth/death refs with `.` and `'s`, compact from-to/until, relative years, big number words).
@@ -65,11 +65,13 @@ MVP interpreter is functional:
 
 The parser uses an abstract `Parser` interface (see `viva.parsers.base`) with a `LarkParser` implementation. This allows swapping the backend (e.g. to a future pure-Python implementation) without changing the rest of the code or the public API.
 
-See [roadmap.md](roadmap.md) for the full phased plan, implemented items, and next steps.
+See [roadmap.md](documentation/roadmap.md) for the full phased plan, implemented items, and next steps.
 
 ## Ownership
 
-100% owned by Alexandre Scherer. This repository supports collaborative development under the terms described in `genesis.txt`.
+100% owned by Alexandre Scherer. This repository supports collaborative development under the terms described in the original (private) genesis document. The full original history is available in the private `https://github.com/ajmscherer/viva_original` repository. 
+
+**Note on history:** This public `viva` repository was created with a clean history (single initial commit) to protect personal information. The previous history containing sensitive data has been moved to the private `viva_original` repo.
 
 ## License
 
@@ -253,7 +255,7 @@ See `src/viva/playground.py` for a complete working example of the controlled sa
 
 Explore the examples in the `examples/` directory, or read `documentation/examples.md` for a rendered view of sample programs and their output.
 
-See `genesis.txt` and `roadmap.md` for background and development history.
+See `roadmap.md` for background and development history. The full original history (including genesis.txt) is in the private `viva_original` repository.
 
 ---
 

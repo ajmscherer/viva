@@ -1,6 +1,6 @@
 # Viva Grammar (Draft - June 2026)
 
-This is an initial formal grammar for Viva, expressed in a PEG/EBNF-like notation for clarity. It is derived directly from the examples and description in `genesis.txt`.
+This is an initial formal grammar for Viva, expressed in a PEG/EBNF-like notation for clarity. It is derived directly from the examples and description in the original (private) genesis document. The full history is in the private `viva_original` repository.
 
 The grammar will be refined iteratively as we implement the parser and add more examples.
 
