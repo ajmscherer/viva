@@ -1,0 +1,6 @@
+# Example from genesis.txt
+life: Paul, man, born 2005
+event: child_birth, in the next 10 years, uniform annual probability 80%
+flow: child_expense, -20k per year, upon child_birth, for 20 years
+flow: saving, 1k per month
+flow: insurance, 1m, upon Paul.death

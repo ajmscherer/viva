@@ -1,0 +1,79 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "viva"
+version = "0.1.0"
+description = "Viva: an English-like domain-specific language (DSL) for modeling and simulating streams of future cash flows"
+readme = {file = "README.md", content-type = "text/markdown"}
+authors = [
+    { name = "Alexandre Scherer" }
+]
+license = { text = "MIT" }
+requires-python = ">=3.10"
+dependencies = [
+    "lark>=1.1.9",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Financial and Insurance Industry",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Mathematics",
+    "Topic :: Software Development :: Compilers",
+    "Topic :: Software Development :: Interpreters",
+]
+
+keywords = [
+    "cash flow",
+    "financial modeling",
+    "simulation",
+    "DSL",
+    "monte carlo",
+    "retirement planning",
+    "probabilistic modeling",
+]
+
+[project.urls]
+Homepage = "https://github.com/ajmscherer/viva"
+Repository = "https://github.com/ajmscherer/viva"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "pytest-cov>=4.0",
+    "black>=23.0",
+    "ruff>=0.1",
+    "mypy>=1.0",
+    "pandas>=2.0",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+"*" = ["*.viva"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py310"
+
+[tool.black]
+line-length = 88
+target-version = ["py310"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "-ra -q"
+
+[tool.basedpyright]
+venvPath = "."
+venv = ".venv"
+pythonVersion = "3.12"

@@ -1,0 +1,62 @@
+mindmap
+  root((Viva Grammar))
+    Program
+      one or more declarations
+    Declaration
+      Life Declaration
+        life, name, type, born date
+      Event Declaration
+        event, name, time window, probability
+      Flow Declaration
+        flow, name, amount, trigger, optional duration
+    Life Declaration Details
+      life_name
+        identifier
+      life_type
+        man, woman, person, or identifier
+      date (MVP)
+        year
+          bare year e.g. 2005
+          resolves to date(year, 1, 1)
+          full flexible dates + ambiguity warnings + month/day precision: deferred (see roadmap.md)
+    Event Declaration Details
+      event_name
+        identifier
+      time_window
+        relative_future | absolute_year | at_age | after_event | starting_at_age
+          e.g. 'in the next 10 years', 'in 2028', 'year 2025', 'at age 65', 'in 3 years after start', 'starting at age 80'
+      probability
+        uniform annual probability N percent
+        or with probability N percent
+    Flow Declaration Details
+      flow_name
+        identifier
+      amount
+        signed_number with optional unit
+      unit
+        k, m, etc.
+      trigger
+        upon event_ref
+        upon life_ref.(death|birth) or life_ref's (death|birth)
+        recurring period
+      duration (MVP)
+        for N years | for life | until event_ref | until N (k/m) total
+          "until 100k total" = cumulative cap; "for life" = to death; also supports birth refs + 's possessive + from-to/until compact + relative years + big number words (k/m/b/t + thousand etc.)
+          full semantics later
+      period (MVP)
+        per month | per year
+          emits one yearly entry (Jan 1) for now
+          full per-period + 1st-of-month default: deferred (roadmap.md)
+      event_ref
+        identifier
+      life_ref
+        identifier
+      signed_number
+        optional sign plus number
+      number
+        digits with optional decimal part
+      identifier
+        letter or underscore, then alphanumeric
+    Whitespace and Comments
+      comment starts with hash
+      whitespace includes spaces, tabs, newlines, comments

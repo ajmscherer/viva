@@ -1,0 +1,44 @@
+# Full Syntax Coverage Example
+# Demonstrates many Viva syntactic features not (fully) covered in the basic examples.
+# Goal: exercise parser + interpreter for completeness.
+
+# Lives with explicit mortality and custom type
+life: Founder, man, born 1970, mortality=SSA_2023_male
+life: Venture, entity, born 2025   # custom life type (not man/woman/person)
+
+# Events with varied time windows and probability phrasings
+event: launch, year 2025, probability 100%
+event: first_revenue, in the next 2 years, uniform annual probability 90%
+event: acquisition, in 8 years after launch, with probability 25%
+event: founder_retirement, at age 60
+event: death_payout_trigger, Founder.death   # direct life_ref as event time window
+event: vesting_cliff, starting at age 35     # starting_at_age as event time window
+event: risk_event, probability 15% per year  # probability-only event
+
+# Flows demonstrating amounts
+flow: initial_capital, 2.5 million, upon launch   # decimal + word unit
+flow: operating_budget, -50000 per year, upon launch, for 3 years   # plain number + for
+flow: revenue_share, 10000 annually, after 2 years   # after standalone + annually keyword on amount
+flow: founder_salary, 120k per year, upon launch, for 10 years
+
+# From / to / until compact forms + birth/death refs
+flow: founder_vesting, 50000 per year, from Founder.birth, for 4 years   # from .birth
+flow: exit_bonus, 1 million, from year 2026   # one-time with from year (no duration => no period needed)
+flow: growth_phase, 30000 per year, from year 2026 until year 2030
+flow: bridge_loan, 25000 per year, from year 3, for 2 years   # small relative year
+
+# Until variants (total with word, year)
+flow: r_and_d, -8000 per month, upon launch, until 200 thousand total   # word total + per month
+flow: legacy_payout, 500k, upon death_payout_trigger   # one-time with life_ref event trigger
+
+# Complex flow modifiers
+flow: retirement_income, 80000 per year, upon founder_retirement, starting at age 60, for life
+flow: post_acquisition, 100k per year, upon acquisition, after 2 years, for 5 years
+
+# One-time and recurring without upon (implicit from start_year)
+flow: office_rent, -12000 per year
+flow: one_time_setup, -15000, upon launch
+
+# More possessive and dot forms on flows
+flow: insurance_premium, -5000 per year, until Founder's death
+flow: inheritance, 300000, upon Founder.death

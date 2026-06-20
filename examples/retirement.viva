@@ -1,0 +1,21 @@
+# Retirement Planning Example
+# Models salary, savings contributions, retirement withdrawals, and social security.
+
+life: Julian, person, born 1980
+
+# Regular income and savings
+flow: salary, 150k per year, until retirement
+flow: 401k_contribution, -20k per year, until retirement
+flow: roth_ira, -7k per year, until retirement
+
+# Event for retirement
+event: retirement, at age 65
+
+# Post-retirement flows
+flow: social_security, 25k per year, upon retirement
+flow: 401k_withdrawal, 60k per year, upon retirement, for 30 years
+flow: roth_ira_withdrawal, 30k per year, upon retirement, for 30 years
+
+# Healthcare and other expenses in retirement
+flow: medicare_premium, -5k per year, upon retirement
+flow: long_term_care, -10k per year, upon retirement, starting at age 80, for life

@@ -1,0 +1,84 @@
+mindmap
+  root((Viva Lark Grammar (MVP)))
+    program
+      start rule
+      declaration+
+    declaration
+      life_decl | event_decl | flow_decl
+    Life Declarations
+      life_decl
+        "life" ":" NAME "," life_type "," "born" year
+      life_type
+        MAN | WOMAN | PERSON | NAME
+      MAN: "man"
+      WOMAN: "woman"
+      PERSON: "person"
+      year
+        YEAR
+    Event Declarations
+      event_decl
+        "event" ":" NAME ( "," event_detail )+
+      event_detail
+        time_window | probability
+      time_window
+        relative_future
+          "in" "the" "next" NUMBER "years"
+        absolute_year
+          "in" year | "year" year
+        at_age
+          "at" "age" NUMBER
+        after_event
+          "in" NUMBER "years" "after" NAME
+        starting_at_age
+          "starting" "at" "age" NUMBER
+      probability
+        "uniform" "annual" "probability" NUMBER "%"
+        | "probability" NUMBER "%" ("per" "year")?
+        | "with" "probability" NUMBER "%"
+    Flow Declarations
+      flow_decl
+        "flow" ":" NAME "," flow_amount ( "," flow_modifier )*
+      flow_amount
+        SIGNED_NUMBER UNIT? ("per" period)?
+      flow_modifier
+        upon_mod | until_mod | for_mod | starting_mod
+      upon_mod
+        "upon" upon_target
+      upon_target
+        NAME | NAME "." (DEATH | BIRTH) | NAME APOS_S (DEATH | BIRTH)
+      until_mod
+        "until" until_target
+      until_target
+        NAME | NUMBER UNIT "total"
+      for_mod
+        "for" for_target
+      for_target
+        NUMBER "years" | LIFE
+      LIFE: "life"
+      starting_mod
+        "starting" "at" "age" NUMBER
+      period
+        MONTH | YEAR_PERIOD
+      MONTH: "month"
+      YEAR_PERIOD: "year"
+    Terminals (Lexer)
+      NAME: /[a-zA-Z0-9_][a-zA-Z0-9_]*/
+      YEAR: /\d{4}/
+      NUMBER: /\d+(\.\d+)?/
+      SIGNED_NUMBER: /[-+]?\d+(\.\d+)?/
+      UNIT: "k" | "m"
+    Ignored
+      %import common.WS
+      %ignore WS
+      COMMENT: /#[^\n]*/
+      %ignore COMMENT
+    Parser
+      parser="earley"
+      start="program"
+      Used to build raw syntactic Tree
+      then Transformer -> Program AST
+    Usage for Syntactic Trees
+      from viva import get_parse_tree
+      tree = get_parse_tree(viva_source)
+      print(tree.pretty())
+      Shows concrete parse tree per this grammar

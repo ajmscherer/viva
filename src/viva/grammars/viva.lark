@@ -1,0 +1,94 @@
+start: program
+program: declaration+
+declaration: life_decl | event_decl | flow_decl
+
+life_decl: "life" ":" NAME "," life_type "," "born" year ( "," mortality )?
+life_type: MAN | WOMAN | PERSON | NAME
+MAN: "man"
+WOMAN: "woman"
+PERSON: "person"
+
+mortality: "mortality" "=" NAME
+
+event_decl: "event" ":" NAME ( "," event_detail )+
+event_detail: time_window | probability
+
+time_window: relative_future
+           | absolute_year
+           | at_age
+           | after_event
+           | starting_at_age
+           | life_ref
+           | person_age
+
+relative_future: "in" "the" "next" NUMBER "years"
+absolute_year: "in" year | "year" year
+at_age: "at" "age" NUMBER
+      | "at" person_age
+after_event: in_after | bare_after
+in_after: "in" NUMBER "years" "after" after_target
+bare_after: NUMBER "years" "after" after_target
+after_target: NAME | NAME "." DEATH | NAME "." BIRTH | NAME APOS_S DEATH | NAME APOS_S BIRTH
+starting_at_age: "starting" "at" "age" NUMBER
+               | "starting" "at" person_age
+person_age: NAME APOS_S "age" NUMBER
+
+probability: "uniform" "annual" "probability" NUMBER "%"
+           | "probability" NUMBER "%" ("per" "year")?
+           | "with" "probability" NUMBER "%"
+
+flow_decl: "flow" ":" NAME "," flow_amount ( "," flow_modifier )*
+
+flow_amount: SIGNED_NUMBER UNIT? frequency?
+flow_modifier: upon_mod | until_mod | for_mod | starting_mod | from_until_mod | from_to_mod | from_mod | after_mod | to_mod
+
+upon_mod: "upon" upon_target
+upon_target: NAME | NAME "." DEATH | NAME "." BIRTH | NAME APOS_S DEATH | NAME APOS_S BIRTH
+DEATH: "death"
+BIRTH: "birth"
+APOS_S: "'s"
+
+until_mod: "until" until_target
+until_target: NAME | NAME "." DEATH | NAME "." BIRTH | NAME APOS_S DEATH | NAME APOS_S BIRTH | total_target | "year" year
+total_target: NUMBER "total" | NUMBER UNIT "total"
+
+for_mod: "for" for_target
+for_target: NUMBER "years" | LIFE
+LIFE: "life"
+
+starting_mod: "starting" "at" "age" NUMBER
+
+from_mod: "from" from_target
+from_target: from_year | from_death | from_birth
+from_year: "year" year
+from_death: dot_death | apos_death
+from_birth: dot_birth | apos_birth
+dot_death: NAME "." DEATH
+apos_death: NAME APOS_S DEATH
+dot_birth: NAME "." BIRTH
+apos_birth: NAME APOS_S BIRTH
+from_to_mod: "from" "year" year "to" "year" year
+from_until_mod: "from" "year" year "until" "year" year
+after_mod: "after" NUMBER "years"
+
+to_mod: "to" "year" year
+
+life_ref: NAME "." (DEATH | BIRTH) | NAME APOS_S (DEATH | BIRTH)
+
+MONTHLY: "monthly"
+YEARLY: "annually"
+per_month: "per" "month"
+per_year: "per" "year"
+frequency: per_month | per_year | MONTHLY | YEARLY
+
+year: YEAR
+NAME: /[a-zA-Z0-9_][a-zA-Z0-9_]*/
+YEAR: /\d{1,4}/
+NUMBER: /\d+(?:[_,](?=\d)\d+)*(\.\d+(?:[_,](?=\d)\d+)*)?/
+SIGNED_NUMBER: /[-+]?/ NUMBER
+UNIT: /(?:thousand|million|billion|trillion|[kmbt])/i
+
+%import common.WS
+%ignore WS
+COMMENT: /#[^\n]*/
+%ignore COMMENT

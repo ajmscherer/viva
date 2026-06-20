@@ -1,0 +1,33 @@
+# Small Business Cash Flow Example
+# Models revenue, operating expenses, loans, taxes, and owner draws for a hypothetical business.
+
+life: Owner, person, born 1975
+
+# Business events
+event: business_start, year 2025
+event: expansion, in 3 years after business_start, probability 60%
+
+# Revenue streams
+flow: product_sales, 500k per year, upon business_start
+flow: service_revenue, 200k per year, upon business_start
+flow: expansion_revenue, 300k per year, upon expansion
+
+# Operating expenses
+flow: salaries, -250k per year, upon business_start
+flow: rent, -60k per year, upon business_start
+flow: marketing, -40k per year, upon business_start
+flow: supplies, -80k per year, upon business_start
+
+# Financing
+flow: startup_loan, 200k, upon business_start
+flow: loan_repayment, -25k per year, upon business_start, for 10 years
+
+# Taxes and owner compensation
+flow: business_tax, -50k per year, upon business_start
+flow: owner_salary, -100k per year, upon business_start
+flow: owner_draw, -50k per year, upon business_start
+
+# One-time events
+flow: equipment_purchase, -150k, upon business_start
+flow: insurance_payout, 100k, upon fire_event  # hypothetical risk event
+event: fire_event, probability 5% per year

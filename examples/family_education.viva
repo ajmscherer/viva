@@ -1,0 +1,32 @@
+# Family with Child and Education Costs
+# Builds on the Paul example with additional life events and flows for a family.
+
+life: Jordan, person, born 1990
+life: Spouse, person, born 1992
+life: Child, person, born 2028   # projected birth (year only in MVP)
+
+# Income
+flow: jordan_salary, 180k per year
+flow: spouse_salary, 90k per year, until child_birth
+
+# Major life event
+event: child_birth, in 2028, probability 100%
+event: child_college, in 18 years after Child's birth   # resolved via birth ref + after (supported)
+
+# Expenses
+flow: housing, -60k per year
+flow: childcare, -25k per year, upon child_birth, for 5 years
+flow: k12_education, -15k per year, upon child_birth, for 13 years
+flow: college_tuition, -50k per year, upon child_college, for 4 years
+
+# Savings and insurance
+flow: emergency_fund, -10k per year, until 100k total
+flow: life_insurance, -3k per year
+flow: payout_on_death, 2m, upon Jordan.death
+flow: payout_on_spouse_death, 1m, upon Spouse.death
+flow: baby_bonus, 5k, upon Child's birth   # new: possessive + birth ref (deterministic)
+
+# Taxes (simplified withholding)
+flow: federal_tax, -35k per year
+flow: state_tax, -12k per year
+flow: property_tax, -8k per year

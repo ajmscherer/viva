@@ -1,0 +1,9 @@
+# License Header Template for Viva Project
+
+# Recommended minimal header (add to the top of .py files):
+
+# Copyright (c) 2026 Alexandre Scherer
+# See LICENSE and COMMERCIAL-LICENSE.md
+
+# Note: This is sufficient. The full license texts are at the project root.
+# No need to paste the entire MIT text into every file.
